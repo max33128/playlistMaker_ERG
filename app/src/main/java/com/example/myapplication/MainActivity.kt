@@ -1,7 +1,7 @@
 package com.example.playlistmaker
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -47,7 +47,7 @@ fun PlaylistMakerScreen() {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color(0xFF2196F3)) // Синий фон
+                .background(Color(0xFF2196F3))
                 .padding(16.dp)
         ) {
             Row(
@@ -59,18 +59,20 @@ fun PlaylistMakerScreen() {
                     text = "Playlist maker",
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White // Белый текст на синем фоне
+                    color = Color.White
                 )
 
                 IconButton(
                     onClick = {
-                        Toast.makeText(context, "Нажата кнопка \"+\"", Toast.LENGTH_SHORT).show()
+                        // ПЕРЕХОД НА ЭКРАН ПОИСКА ПРИ НАЖАТИИ НА "+"
+                        val intent = Intent(context, SearchActivity::class.java)
+                        context.startActivity(intent)
                     }
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
                         contentDescription = "Добавить плейлист",
-                        tint = Color.White // Белая иконка на синем фоне
+                        tint = Color.White
                     )
                 }
             }
@@ -78,10 +80,10 @@ fun PlaylistMakerScreen() {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // ПОЛЕ ПОИСКА
+        // ПОЛЕ ПОИСКА (УПРОЩЕННАЯ ВЕРСИЯ БЕЗ onFocusChange)
         TextField(
             value = searchText,
-            onValueChange = { searchText = it },
+            onValueChange = { newText -> searchText = newText },
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Search,
@@ -102,7 +104,9 @@ fun PlaylistMakerScreen() {
             // Пункт "Плейлисты"
             Card(
                 onClick = {
-                    Toast.makeText(context, "Нажата кнопка \"Плейлисты\"", Toast.LENGTH_SHORT).show()
+                    // ПЕРЕХОД НА ЭКРАН ПОИСКА
+                    val intent = Intent(context, SearchActivity::class.java)
+                    context.startActivity(intent)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -133,7 +137,9 @@ fun PlaylistMakerScreen() {
             // Пункт "Избранное"
             Card(
                 onClick = {
-                    Toast.makeText(context, "Нажата кнопка \"Избранное\"", Toast.LENGTH_SHORT).show()
+                    // ПЕРЕХОД НА ЭКРАН ПОИСКА
+                    val intent = Intent(context, SearchActivity::class.java)
+                    context.startActivity(intent)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -164,7 +170,9 @@ fun PlaylistMakerScreen() {
             // Пункт "Настройки"
             Card(
                 onClick = {
-                    Toast.makeText(context, "Нажата кнопка \"Настройки\"", Toast.LENGTH_SHORT).show()
+                    // ПЕРЕХОД НА ЭКРАН НАСТРОЕК
+                    val intent = Intent(context, SettingsActivity::class.java)
+                    context.startActivity(intent)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
