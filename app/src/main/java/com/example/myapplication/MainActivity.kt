@@ -186,7 +186,7 @@ fun PlaylistMakerScreen() {
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = "Настройки приложений",
+                        text = "Настройки",
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Medium
                     )
