@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
@@ -22,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.playlistmaker.ui.theme.PlaylistMakerTheme
+
 
 class SearchActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,7 +136,7 @@ fun SearchScreen(
                             }
                         ) {
                             Icon(
-                                imageVector = Icons.Default.Close,
+                                imageVector = Icons.Default.Clear,
                                 contentDescription = "Очистить поиск",
                                 tint = Color.Gray
                             )
