@@ -23,7 +23,7 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun PlaylistMakerTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+
     content: @Composable () -> Unit
 ) {
     MaterialTheme(
