@@ -20,12 +20,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.playlistmaker.ui.theme.PlaylistMakerTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MaterialTheme {
+            PlaylistMakerTheme {
                 PlaylistMakerScreen()
             }
         }
@@ -36,7 +37,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun PlaylistMakerScreen() {
     val context = LocalContext.current
-    var searchText by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -80,27 +80,54 @@ fun PlaylistMakerScreen() {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // ПОЛЕ ПОИСКА (УПРОЩЕННАЯ ВЕРСИЯ БЕЗ onFocusChange)
-        TextField(
-            value = searchText,
-            onValueChange = { newText -> searchText = newText },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = "Поиск"
-                )
-            },
-            placeholder = {
-                Text("Поиск")
-            },
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp)
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // СПИСОК МЕНЮ
+        // СПИСОК МЕНЮ (все как отдельные ячейки)
         Column {
+            // Пункт "Поиск" - теперь как отдельная ячейка
+            Card(
+                onClick = {
+                    // ПЕРЕХОД НА ЭКРАН ПОИСКА
+                    val intent = Intent(context, SearchActivity::class.java)
+                    context.startActivity(intent)
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = "Поиск",
+                            tint = Color.Gray,
+                            modifier = Modifier.size(24.dp)
+                        )
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Text(
+                            text = "Поиск",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.Black
+                        )
+                    }
+
+                    Icon(
+                        imageVector = Icons.Default.ArrowForward,
+                        contentDescription = "Перейти",
+                        tint = Color.Gray
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
             // Пункт "Плейлисты"
             Card(
                 onClick = {
@@ -122,12 +149,14 @@ fun PlaylistMakerScreen() {
                     Text(
                         text = "Плейлисты",
                         fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Medium,
+                        color = Color.Black
                     )
 
                     Icon(
                         imageVector = Icons.Default.ArrowForward,
-                        contentDescription = "Перейти"
+                        contentDescription = "Перейти",
+                        tint = Color.Gray
                     )
                 }
             }
@@ -155,12 +184,14 @@ fun PlaylistMakerScreen() {
                     Text(
                         text = "Избранное",
                         fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Medium,
+                        color = Color.Black
                     )
 
                     Icon(
                         imageVector = Icons.Default.ArrowForward,
-                        contentDescription = "Перейти"
+                        contentDescription = "Перейти",
+                        tint = Color.Gray
                     )
                 }
             }
@@ -171,8 +202,13 @@ fun PlaylistMakerScreen() {
             Card(
                 onClick = {
                     // ПЕРЕХОД НА ЭКРАН НАСТРОЕК
-                    val intent = Intent(context, SettingsActivity::class.java)
-                    context.startActivity(intent)
+                    try {
+                        val intent = Intent(context, SettingsActivity::class.java)
+                        context.startActivity(intent)
+                    } catch (e: Exception) {
+                        // Если SettingsActivity еще не создан, показываем сообщение
+                        println("SettingsActivity еще не создан: $e")
+                    }
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -186,14 +222,16 @@ fun PlaylistMakerScreen() {
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = "Настройки приложений",
+                        text = "Настройки приложения",
                         fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Medium,
+                        color = Color.Black
                     )
 
                     Icon(
                         imageVector = Icons.Default.ArrowForward,
-                        contentDescription = "Перейти"
+                        contentDescription = "Перейти",
+                        tint = Color.Gray
                     )
                 }
             }
