@@ -1,55 +1,81 @@
-package com.example.myapplication.navigation
+package com.example.playlistmaker.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.myapplication.MainScreen
-import com.example.myapplication.SearchScreen
-import com.example.myapplication.SettingsScreen
+import com.example.playlistmaker.ui.MainScreen
+import com.example.playlistmaker.ui.SearchScreen
+import com.example.playlistmaker.ui.SettingsScreen
+
 
 @Composable
-fun PlaylistHost(navController: NavHostController) {
+fun PlaylistHost(
+    navController: NavHostController  // ✅ Принимаем NavController на вход
+) {
+    // NavHost requires a NavHostController specifically
     NavHost(
         navController = navController,
         startDestination = Screen.MainScreen.route
     ) {
         composable(Screen.MainScreen.route) {
             MainScreen(
-                onSearchClick = { navigateToSearch(navController) },
-                onSettingsClick = { navigateToSettings(navController) }
+                onNavigateToSearch = {
+                    navigateToSearch(navController)
+                },
+                onNavigateToSettings = {
+                    navigateToSettings(navController)
+                }
             )
         }
 
         composable(Screen.SearchScreen.route) {
             SearchScreen(
-                onBackClick = { navigateBack(navController) }
+                onSearch = { query ->
+                    println("Поиск: $query")
+                },
+                onBackClick = {
+                    navigateBack(navController)
+                }
             )
         }
 
         composable(Screen.SettingsScreen.route) {
             SettingsScreen(
-                onBackClick = { navigateBack(navController) }
+                onBackClick = {
+                    navigateBack(navController)
+                }
             )
         }
     }
 }
 
-// Методы навигации
-fun navigateToMain(navController: NavHostController) {
-    navController.navigate(Screen.MainScreen.route) {
-        popUpTo(Screen.MainScreen.route) { inclusive = true }
-    }
-}
+/**
+ * Методы для переходов между экранами
+ * Должны использовать NavController и enum-класс Screen
+ */
 
-fun navigateToSearch(navController: NavHostController) {
+// ✅ Метод перехода на экран поиска
+fun navigateToSearch(navController: NavController) {
     navController.navigate(Screen.SearchScreen.route)
 }
 
-fun navigateToSettings(navController: NavHostController) {
+// ✅ Метод перехода на экран настроек
+fun navigateToSettings(navController: NavController) {
     navController.navigate(Screen.SettingsScreen.route)
 }
 
-fun navigateBack(navController: NavHostController) {
+// ✅ Метод возврата назад
+fun navigateBack(navController: NavController) {
     navController.popBackStack()
+}
+
+// ✅ Дополнительный метод: переход на главный экран
+fun navigateToMain(navController: NavController) {
+    navController.navigate(Screen.MainScreen.route) {
+        popUpTo(Screen.MainScreen.route) {
+            inclusive = true
+        }
+    }
 }

@@ -1,8 +1,8 @@
-package com.example.myapplication.navigation
+package com.example.playlistmaker.navigation
 
 enum class Screen(val route: String) {
     MainScreen("main_screen"),
     SearchScreen("search_screen"),
     SettingsScreen("settings_screen")
-    // Добавьте другие экраны по мере необходимости
+    // Добавим PlaylistsScreen и FavoritesScreen позже если нужно
 }
