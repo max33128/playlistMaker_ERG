@@ -1,4 +1,4 @@
-package com.example.playlistmaker
+package com.example.myapplication.ui.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PlaylistMakerTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.Companion.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
                     // 1. Создаем NavController
