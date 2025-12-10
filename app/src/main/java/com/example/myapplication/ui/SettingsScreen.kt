@@ -1,4 +1,4 @@
-package com.example.playlistmaker.ui
+package com.example.myapplication.ui
 
 import android.content.Intent
 import android.net.Uri
@@ -17,8 +17,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.playlistmaker.R
-import com.example.playlistmaker.ui.theme.PlaylistMakerTheme
+import com.example.myapplication.R
+import com.example.myapplication.ui.theme.PlaylistMakerTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -80,9 +80,8 @@ fun SettingsScreen(
                 },
                 modifier = Modifier.clickable {
                     val sendIntent = Intent().apply {
-                        action = Intent.ACTION_SEND
-                        type = "text/plain"
-                        // Используем заранее полученную переменную shareText
+                        action = Intent.ACTION_SEND  // Corrected: assign to the 'action' property
+                        type = "text/plain"          // Corrected: assign to the 'type' property
                         putExtra(Intent.EXTRA_TEXT, shareText)
                     }
                     val shareIntent = Intent.createChooser(sendIntent, null)

@@ -1,11 +1,9 @@
-package com.example.playlistmaker.ui.theme
+package com.example.myapplication.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.example.myapplication.ui.theme.Typography
 
 private val LightColorScheme = lightColorScheme(
     primary = Color(0xFF2196F3), // Основной синий цвет

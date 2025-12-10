@@ -1,10 +1,13 @@
 package com.example.myapplication.data.network
-
+import com.example.myapplication.domain.api.TracksRepository
+import com.example.myapplication.domain.models.Track
+import com.example.myapplication.data.dto.TracksSearchRequest
+import com.example.myapplication.data.dto.TracksSearchResponse
 
 
 class TracksRepositoryImpl(private val networkClient: NetworkClient) : TracksRepository {
 
-    override fun searchTracks(expression: String): List<Track> {
+    override  suspend  fun searchTracks(expression: String): List<Track> {
         val response = networkClient.doRequest(TracksSearchRequest(expression))
         if (response.resultCode == 200) { // успешный запрос
             return (response as TracksSearchResponse).results.map {

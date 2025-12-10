@@ -1,13 +1,13 @@
-package com.example.playlistmaker.navigation
+package com.example.myapplication.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.playlistmaker.ui.MainScreen
-import com.example.playlistmaker.ui.SearchScreen
-import com.example.playlistmaker.ui.SettingsScreen
+import com.example.myapplication.ui.MainScreen
+import com.example.myapplication.ui.SearchScreen
+import com.example.myapplication.ui.SettingsScreen
 
 
 @Composable

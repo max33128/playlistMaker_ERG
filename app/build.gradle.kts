@@ -2,14 +2,16 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+
+
 }
 
 android {
-    namespace = "com.example.playlistmaker"
+    namespace = "com.example.myapplication"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.playlistmaker"
+        applicationId = "com.example.myapplication"
         minSdk = 29
         targetSdk = 36
         versionCode = 1

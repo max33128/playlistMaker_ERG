@@ -1,4 +1,4 @@
-package com.example.playlistmaker.ui
+package com.example.myapplication.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -20,8 +20,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.playlistmaker.ui.theme.BluePrimary
-import com.example.playlistmaker.ui.theme.GrayBackground
+import com.example.myapplication.ui.theme.BluePrimary
+import com.example.myapplication.ui.theme.GrayBackground
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

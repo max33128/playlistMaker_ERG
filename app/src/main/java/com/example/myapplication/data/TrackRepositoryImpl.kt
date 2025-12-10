@@ -4,7 +4,7 @@ import com.example.myapplication.data.dto.TracksSearchRequest
 import com.example.myapplication.data.dto.TracksSearchResponse
 import com.example.myapplication.domain.api.NetworkClient
 import com.example.myapplication.domain.api.TracksRepository
-import com.example.myapplication.domain.model.Track
+import com.example.myapplication.domain.models.Track
 import kotlinx.coroutines.delay
 
 class TracksRepositoryImpl(private val networkClient: NetworkClient) : TracksRepository {
