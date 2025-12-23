@@ -7,7 +7,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.ui.text.input.KeyboardType
-
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
+import com.example.myapplication.R
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
@@ -248,35 +250,58 @@ private fun ErrorState(error: String, onRetry: () -> Unit) {
 @Composable
 fun TrackItem(track: Track) {
     Card(
-        onClick = { /* Действие при нажатии на трек */ }
+        onClick = { /* Действие при нажатии на трек */ },
+        modifier = Modifier.fillMaxWidth()
     ) {
-        Column(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = track.trackName,
-                style = MaterialTheme.typography.titleMedium,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+            // ИКОНКА СЛЕВА (LEADING ICON)
+            Image(
+                painter = painterResource(id = R.drawable.ic_music),
+                contentDescription = "Иконка трека",
+                modifier = Modifier
+                    .size(40.dp)
+                    .padding(end = 12.dp)
             )
 
-            Spacer(modifier = Modifier.height(4.dp))
+            // ОСНОВНАЯ ИНФОРМАЦИЯ
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                // Первая строка: название трека и длительность
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = track.trackName,
+                        style = MaterialTheme.typography.titleMedium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.weight(1f)
+                    )
 
-            Text(
-                text = track.artistName,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f)
-            )
+                    Spacer(modifier = Modifier.width(8.dp))
 
-            Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = track.trackTime,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                    )
+                }
 
-            Text(
-                text = "Длительность: ${track.trackTime}",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-            )
+                Spacer(modifier = Modifier.height(4.dp))
+
+                // Вторая строка: артист
+                Text(
+                    text = track.artistName,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f)
+                )
+            }
         }
     }
 }
