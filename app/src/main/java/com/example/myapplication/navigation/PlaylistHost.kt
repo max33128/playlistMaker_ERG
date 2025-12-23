@@ -1,81 +1,47 @@
 package com.example.myapplication.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.myapplication.ui.MainScreen
+import com.example.myapplication.ui.MediaLibraryScreen
 import com.example.myapplication.ui.SearchScreen
 import com.example.myapplication.ui.SettingsScreen
 
-
 @Composable
 fun PlaylistHost(
-    navController: NavHostController
+    navController: NavHostController,
+    modifier: Modifier = Modifier
 ) {
-    // NavHost requires a NavHostController specifically
     NavHost(
         navController = navController,
-        startDestination = Screen.MainScreen.route
+        startDestination = Screen.Main.route,
+        modifier = modifier
     ) {
-        composable(Screen.MainScreen.route) {
+        // Экран Main
+        composable(Screen.Main.route) {
             MainScreen(
-                onNavigateToSearch = {
-                    navigateToSearch(navController)
-                },
-                onNavigateToSettings = {
-                    navigateToSettings(navController)
-                }
+                onNavigateToSearch = { navController.navigate(Screen.Search.route) },
+                onNavigateToMediaLibrary = { navController.navigate(Screen.MediaLibrary.route) },
+                onNavigateToSettings = { navController.navigate(Screen.Settings.route) }
             )
         }
 
-        composable(Screen.SearchScreen.route) {
-            SearchScreen(
-                onSearch = { query ->
-                    println("Поиск: $query")
-                },
-                onBackClick = {
-                    navigateBack(navController)
-                }
-            )
+        // Экран MediaLibrary
+        composable(Screen.MediaLibrary.route) {
+            MediaLibraryScreen()
         }
 
-        composable(Screen.SettingsScreen.route) {
-            SettingsScreen(
-                onBackClick = {
-                    navigateBack(navController)
-                }
-            )
+        // Экран Search (СТАРТОВЫЙ)
+        composable(Screen.Search.route) {
+            SearchScreen()
         }
-    }
-}
 
-/**
- * Методы для переходов между экранами
- * Должны использовать NavController и enum-класс Screen
- */
-
-// ✅ Метод перехода на экран поиска
-fun navigateToSearch(navController: NavController) {
-    navController.navigate(Screen.SearchScreen.route)
-}
-
-// ✅ Метод перехода на экран настроек
-fun navigateToSettings(navController: NavController) {
-    navController.navigate(Screen.SettingsScreen.route)
-}
-
-// ✅ Метод возврата назад
-fun navigateBack(navController: NavController) {
-    navController.popBackStack()
-}
-
-// ✅ Дополнительный метод: переход на главный экран
-fun navigateToMain(navController: NavController) {
-    navController.navigate(Screen.MainScreen.route) {
-        popUpTo(Screen.MainScreen.route) {
-            inclusive = true
+        // Экран Settings
+        composable(Screen.Settings.route) {
+            SettingsScreen()
         }
     }
 }

@@ -7,8 +7,7 @@ import com.example.myapplication.domain.api.TracksRepository
 
 object Creator {
 
-    fun provideTracksRepository(): TracksRepository {
-
+    fun getTracksRepository(): TracksRepository {
         return TracksRepositoryImpl(
             RetrofitNetworkClient(Storage())
         )

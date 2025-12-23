@@ -1,149 +1,243 @@
+
 package com.example.myapplication.ui
 
-import android.content.Intent
-import android.net.Uri
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.myapplication.R
-import com.example.myapplication.ui.theme.PlaylistMakerTheme
+import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(
-    onBackClick: () -> Unit
-) {
-    val context = LocalContext.current
+fun SettingsScreen() {
+    val darkTheme = remember { mutableStateOf(false) }
+    val notifications = remember { mutableStateOf(true) }
+    val autoPlay = remember { mutableStateOf(true) }
+    val highQuality = remember { mutableStateOf(false) }
 
-    // 1. Получаем все строковые ресурсы ЗАРАНЕЕ, здесь, в Composable-контексте
-    val shareText = stringResource(R.string.share_text)
-    val developerEmail = stringResource(R.string.developer_email)
-    val emailSubject = stringResource(R.string.email_subject)
-    val emailBody = stringResource(R.string.email_body)
-    val termsUrl = stringResource(R.string.terms_url)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Настройки",
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.padding(bottom = 24.dp)
+        )
 
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(R.string.settings),
-                        style = MaterialTheme.typography.headlineMedium.copy(
-                            fontWeight = FontWeight.Bold
-                        ),
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = onBackClick) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = stringResource(R.string.back),
-                            tint = MaterialTheme.colorScheme.onSurface
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
-                )
-            )
-        }
-    ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+        // Внешний вид
+        Card(
+            modifier = Modifier.padding(bottom = 16.dp)
         ) {
-            // Поделиться приложением
-            ListItem(
-                headlineContent = { Text(stringResource(R.string.share_app)) },
-                trailingContent = {
-                    Icon(
-                        imageVector = Icons.Default.Share,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                },
-                modifier = Modifier.clickable {
-                    val sendIntent = Intent().apply {
-                        action = Intent.ACTION_SEND  // Corrected: assign to the 'action' property
-                        type = "text/plain"          // Corrected: assign to the 'type' property
-                        putExtra(Intent.EXTRA_TEXT, shareText)
-                    }
-                    val shareIntent = Intent.createChooser(sendIntent, null)
-                    context.startActivity(shareIntent)
-                }
-            )
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text(
+                    text = "Внешний вид",
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 18.sp,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
 
-            // Написать разработчикам
-            ListItem(
-                headlineContent = { Text(stringResource(R.string.write_to_developers)) },
-                trailingContent = {
-                    Icon(
-                        imageVector = Icons.Default.Email,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                },
-                modifier = Modifier.clickable {
-                    val uri = Uri.parse("mailto:$developerEmail")
-                        .buildUpon()
-                        .appendQueryParameter("subject", emailSubject)
-                        .appendQueryParameter("body", emailBody)
-                        .build()
-
-                    val intent = Intent(Intent.ACTION_SENDTO, uri)
-                    // Проверка на наличие почтового клиента не обязательна в новых API, но желательна
-                    // try-catch блок нужен на случай, если нет почтового приложения
-                    try {
-                        context.startActivity(intent)
-                    } catch (e: Exception) {
-                        // Можно добавить Toast с сообщением об ошибке
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Filled.DarkMode,
+                            contentDescription = "Тема",
+                            modifier = Modifier.padding(end = 12.dp)
+                        )
+                        Text("Темная тема")
                     }
-                }
-            )
-
-            // Пользовательское соглашение
-            ListItem(
-                headlineContent = { Text(stringResource(R.string.user_agreement)) },
-                trailingContent = {
-                    Icon(
-                        imageVector = Icons.Default.ArrowForward,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    Switch(
+                        checked = darkTheme.value,
+                        onCheckedChange = { darkTheme.value = it }
                     )
-                },
-                modifier = Modifier.clickable {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(termsUrl.trim()))
-                    try {
-                        context.startActivity(intent)
-                    } catch (e: Exception) {
-                        // Можно добавить обработку ошибок
-                    }
                 }
-            )
+            }
+        }
+
+        // Уведомления
+        Card(
+            modifier = Modifier.padding(bottom = 16.dp)
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text(
+                    text = "Уведомления",
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 18.sp,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Filled.Notifications,
+                            contentDescription = "Уведомления",
+                            modifier = Modifier.padding(end = 12.dp)
+                        )
+                        Text("Push-уведомления")
+                    }
+                    Switch(
+                        checked = notifications.value,
+                        onCheckedChange = { notifications.value = it }
+                    )
+                }
+            }
+        }
+
+        // Воспроизведение
+        Card(
+            modifier = Modifier.padding(bottom = 16.dp)
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text(
+                    text = "Воспроизведение",
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 18.sp,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Filled.PlayArrow,
+                            contentDescription = "Автовоспроизведение",
+                            modifier = Modifier.padding(end = 12.dp)
+                        )
+                        Text("Автовоспроизведение")
+                    }
+                    Switch(
+                        checked = autoPlay.value,
+                        onCheckedChange = { autoPlay.value = it }
+                    )
+                }
+
+                Divider(modifier = Modifier.padding(vertical = 12.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Filled.HighQuality,
+                            contentDescription = "Качество",
+                            modifier = Modifier.padding(end = 12.dp)
+                        )
+                        Text("Высокое качество")
+                    }
+                    Switch(
+                        checked = highQuality.value,
+                        onCheckedChange = { highQuality.value = it }
+                    )
+                }
+            }
+        }
+
+        // О приложении
+        Card {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text(
+                    text = "О приложении",
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 18.sp,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
+
+                SettingItem(
+                    icon = Icons.Filled.Info,
+                    text = "Версия",
+                    value = "1.0.0"
+                )
+
+                Divider(modifier = Modifier.padding(vertical = 8.dp))
+
+                SettingItem(
+                    icon = Icons.Filled.Policy,
+                    text = "Политика конфиденциальности",
+                    onClick = { /* Открыть политику */ }
+                )
+
+                Divider(modifier = Modifier.padding(vertical = 8.dp))
+
+                SettingItem(
+                    icon = Icons.Filled.Description,
+                    text = "Пользовательское соглашение",
+                    onClick = { /* Открыть соглашение */ }
+                )
+
+                Divider(modifier = Modifier.padding(vertical = 8.dp))
+
+                SettingItem(
+                    icon = Icons.Filled.Email,
+                    text = "Обратная связь",
+                    onClick = { /* Открыть форму обратной связи */ }
+                )
+            }
         }
     }
 }
 
-@Preview(showBackground = true)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreenPreview() {
-    PlaylistMakerTheme {
-        SettingsScreen(onBackClick = {})
+fun SettingItem(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    text: String,
+    value: String? = null,
+    onClick: (() -> Unit)? = null
+) {
+    val content = @Composable {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = text,
+                modifier = Modifier.padding(end = 12.dp)
+            )
+            Text(text, modifier = Modifier.weight(1f))
+            value?.let {
+                Text(
+                    text = it,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
+            }
+        }
+    }
+
+    if (onClick != null) {
+        Card(
+            onClick = onClick,
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+        ) {
+            content()
+        }
+    } else {
+        content()
     }
 }

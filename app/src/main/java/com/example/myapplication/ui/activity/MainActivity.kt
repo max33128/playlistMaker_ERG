@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PlaylistMakerTheme {
                 Surface(
-                    modifier = Modifier.Companion.fillMaxSize(),
+                    modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
                     // 1. Создаем NavController

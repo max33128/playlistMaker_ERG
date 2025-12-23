@@ -6,57 +6,57 @@ import com.example.myapplication.data.dto.TrackDto
 
 class Storage {
     private val listTracks = listOf(
+        // Уникальные треки (по одному на артиста)
         TrackDto(
-            trackName = "Владивосток 2000",
-            artistName = "Мумий Троль",
-            trackTimeMillis = 158000 // 2:38
+            trackName = "Total Eclipse of the Heart",
+            artistName = "Bonnie Tyler",
+            trackTimeMillis = 411000 // 6:51
         ),
         TrackDto(
-            trackName = "Группа крови",
-            artistName = "Кино",
-            trackTimeMillis = 283000 // 4:43
+            trackName = "Shout",
+            artistName = "Tears For Fears",
+            trackTimeMillis = 361000 // 6:01
         ),
         TrackDto(
-            trackName = "Не смотри назад",
-            artistName = "Ария",
-            trackTimeMillis = 312000 // 5:12
+            trackName = "Dream On",
+            artistName = "Aerosmith",
+            trackTimeMillis = 281000 // 4:41
         ),
         TrackDto(
-            trackName = "Звезда по имени Солнце",
-            artistName = "Кино",
-            trackTimeMillis = 225000
+            trackName = "I'll Be Missing You (feat. Faith Evans, 112)",
+            artistName = "P. Diddy",
+            trackTimeMillis = 308000 // 5:08
         ),
         TrackDto(
-            trackName = "Лондон",
-            artistName = "Аквариум",
-            trackTimeMillis = 272000
+            trackName = "Hotel California (2013 Remaster)",
+            artistName = "Eagles",
+            trackTimeMillis = 392000 // 6:32
         ),
         TrackDto(
-            trackName = "На заре",
-            artistName = "Альянс",
-            trackTimeMillis = 230000
+            trackName = "Come Undone",
+            artistName = "Duran Duran",
+            trackTimeMillis = 270000 // 4:30
         ),
         TrackDto(
-            trackName = "Перемен",
-            artistName = "Кино",
-            trackTimeMillis = 296000
+            trackName = "Love & Hate",
+            artistName = "Michael Kiwanuka",
+            trackTimeMillis = 428000 // 7:08
         ),
         TrackDto(
-            trackName = "Розовый фламинго",
-            artistName = "Сплин",
-            trackTimeMillis = 195000
+            trackName = "Ayo Technology (Live with Orchestra)",
+            artistName = "Milow",
+            trackTimeMillis = 222000 // 3:42
         ),
         TrackDto(
-            trackName = "Танцевать",
-            artistName = "Мельница",
-            trackTimeMillis = 222000
+            trackName = "Freed From Desire (Acoustic Version)",
+            artistName = "Gala",
+            trackTimeMillis = 194000 // 3:14
         ),
         TrackDto(
-            trackName = "Чёрный бумер",
-            artistName = "Серега",
-            trackTimeMillis = 241000
-        )
-    )
+            trackName = "The Chain (Remastered)",
+            artistName = "Fleetwood Mac",
+            trackTimeMillis = 270000 // 4:30
+        ))
 
     fun search(request: String): List<TrackDto> {
         val result = listTracks.filter {

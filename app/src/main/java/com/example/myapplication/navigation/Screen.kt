@@ -1,8 +1,9 @@
+// Файл: navigation/Screens.kt
 package com.example.myapplication.navigation
 
-enum class Screen(val route: String) {
-    MainScreen("main_screen"),
-    SearchScreen("search_screen"),
-    SettingsScreen("settings_screen")
-    // Добавим PlaylistsScreen и FavoritesScreen позже если нужно
+sealed class Screen(val route: String) {
+    object Main : Screen("main")
+    object MediaLibrary : Screen("media_library")
+    object Search : Screen("search")
+    object Settings : Screen("settings")
 }

@@ -27,8 +27,9 @@ import com.example.myapplication.ui.theme.GrayBackground
 @Composable
 fun MainScreen(
     onNavigateToSearch: () -> Unit,
+    onNavigateToMediaLibrary: () -> Unit,
     onNavigateToSettings: () -> Unit
-) {
+){
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
