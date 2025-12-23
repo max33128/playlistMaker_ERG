@@ -12,7 +12,7 @@ import com.example.myapplication.ui.SettingsScreen
 
 @Composable
 fun PlaylistHost(
-    navController: NavHostController  // ✅ Принимаем NavController на вход
+    navController: NavHostController
 ) {
     // NavHost requires a NavHostController specifically
     NavHost(
