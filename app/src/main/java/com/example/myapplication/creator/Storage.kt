@@ -6,7 +6,45 @@ import com.example.myapplication.data.dto.TrackDto
 
 class Storage {
     private val listTracks = listOf(
-        // Уникальные треки (по одному на артиста)
+
+
+        TrackDto(
+            trackName = "По МКАДу",
+            artistName = "Wallem, AKVЛИЧ",
+            trackTimeMillis = 185000 // 3:05
+        ),
+        TrackDto(
+            trackName = "СВЕТЛАНА!",
+            artistName = "NEXTIME",
+            trackTimeMillis = 162000 // 2:42
+        ),
+        TrackDto(
+            trackName = "plan b",
+            artistName = "Rakhim, The Limba",
+            trackTimeMillis = 198000 // 3:18
+        ),
+        TrackDto(
+            trackName = "Не Беспокоюсь",
+            artistName = "Мэйби Бэйби, Lida",
+            trackTimeMillis = 176000 // 2:56
+        ),
+        TrackDto(
+            trackName = "СВАГА",
+            artistName = "HELLOVERCAVI, SODALUV",
+            trackTimeMillis = 154000 // 2:34
+        ),
+        TrackDto(
+            trackName = "ВИП",
+            artistName = "unige, nkeeel, ARTEM SHILOVETS, Toxi$",
+            trackTimeMillis = 193000 // 3:13
+        ),
+        TrackDto(
+            trackName = "Illegal (pinkpanth)",
+            artistName = "RhythmRebel, TommyMuzzle, speed up, MysticMuse",
+            trackTimeMillis = 172000 // 2:52
+        ),
+
+
         TrackDto(
             trackName = "Total Eclipse of the Heart",
             artistName = "Bonnie Tyler",

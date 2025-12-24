@@ -55,25 +55,25 @@ fun SearchScreen() {
         OutlinedTextField(
             value = searchQuery,
             onValueChange = { searchQuery = it },
-            label = { Text("Введите название трека") },
-            placeholder = { Text("Например: Кино, Сплин, Ария...") },
+            label = { Text("Поиск треков") },
+            placeholder = { Text("Введите на русском или английском") },
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
 
+            // Упрощенные настройки
             keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Search, // Меняем иконку Enter на "лупу"
-                keyboardType = KeyboardType.Text,
-                capitalization = KeyboardCapitalization.Sentences,
-                autoCorrect = true
+                imeAction = ImeAction.Search
+                // Не указывайте другие параметры временно
             ),
+
             keyboardActions = KeyboardActions(
                 onSearch = {
-                    // Выполняем поиск при нажатии Enter/Поиск на клавиатуре
                     if (searchQuery.isNotEmpty()) {
                         viewModel.search(searchQuery)
                     }
                 }
             ),
+
             leadingIcon = {
                 Icon(Icons.Default.Search, "Поиск")
             },
