@@ -1,4 +1,3 @@
-// Файл: ui/screens/MediaLibraryScreen.kt
 package com.example.myapplication.ui
 
 import androidx.compose.foundation.layout.Arrangement
