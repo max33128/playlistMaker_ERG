@@ -70,7 +70,7 @@ fun MainScreen(
                 MenuButton(
                     icon = Icons.Outlined.PlaylistPlay,
                     title = "Плейлисты",
-                    onClick = { /* TODO: Navigate to playlists */ }
+                    onClick = onNavigateToMediaLibrary
                 )
                 MenuButton(
                     icon = Icons.Default.Favorite,
